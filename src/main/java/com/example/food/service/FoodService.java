@@ -1,7 +1,9 @@
 package com.example.food.service;
 
 import com.example.food.model.Food;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FoodService {
 
     public Food[] getFoods(){

@@ -1,6 +1,7 @@
 package com.example.food.controller;
 
 import com.example.food.model.Food;
+import com.example.food.service.FoodService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FoodController {
 
+    private FoodService foodService;
+
+    public FoodController(FoodService foodService) {
+        this.foodService = foodService;
+    }
+
     @GetMapping("/home")
     public String getHome(Model model){
         model.addAttribute("message", "Hello! Welcome to the food controller.");
-        Food[] foods = {new Food("pizza", 12.00), new Food("curry", 8.99), new Food("beer", 4.50)};
+        Food[] foods = foodService.getFoods();
         model.addAttribute("foods", foods);
         return "home";
     }
